@@ -41,36 +41,6 @@ const TESTIMONIALS = [
   { id: 3, name: "Marcus Chen", role: "Investment Steward", content: "Professionalism meets deep-rooted heritage. Their mapping technology saved us months of site analysis.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200" },
 ];
 
-const THEMES = {
-  champagne: {
-    primary: "#2D3B2D",
-    secondary: "#A88E75",
-    accent: "#F5EFE6",
-    background: "#FCF9F6",
-    foreground: "#1A1A1A",
-    nav: "bg-white",
-    card: "bg-accent/20"
-  },
-  midnight: {
-    primary: "#FFFFFF",
-    secondary: "#CD7F32",
-    accent: "#1E1E1E",
-    background: "#121212",
-    foreground: "#EAEAEA",
-    nav: "bg-[#1A1A1A]",
-    card: "bg-[#1E1E1E]"
-  },
-  heritage: {
-    primary: "#001F3F",
-    secondary: "#C5A059",
-    accent: "#E8E2D6",
-    background: "#FDFBF7",
-    foreground: "#001F3F",
-    nav: "bg-white",
-    card: "bg-accent/30"
-  }
-};
-
 const ONGOING_PROJECTS = [
   { id: 1, title: "Veridian Enclave", status: "Groundbreaking", completion: "Q4 2025", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" },
   { id: 2, title: "Azure Heights", status: "Structural Phase", completion: "Q2 2026", img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&q=80&w=1200" },
@@ -285,20 +255,9 @@ const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: nu
 export default function App() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState<keyof typeof THEMES>("champagne");
   const [selectedProperty, setSelectedProperty] = useState<typeof LISTINGS[0] | null>(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
-  const theme = THEMES[currentTheme];
-
-  useEffect(() => {
-    document.documentElement.style.setProperty('--primary', theme.primary);
-    document.documentElement.style.setProperty('--secondary', theme.secondary);
-    document.documentElement.style.setProperty('--accent', theme.accent);
-    document.documentElement.style.setProperty('--background', theme.background);
-    document.documentElement.style.setProperty('--foreground', theme.foreground);
-  }, [currentTheme]);
 
   const filteredListings = LISTINGS.filter(l => activeCategory === "All" || l.category === activeCategory);
 
@@ -309,7 +268,7 @@ export default function App() {
       <motion.div className="fixed top-0 left-0 right-0 h-[3px] bg-secondary z-[100] origin-left" style={{ scaleX }} />
 
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 shadow-sm border-b border-primary/5 transition-colors duration-500 ${theme.nav}`}>
+      <nav className="fixed top-0 w-full z-50 shadow-sm border-b border-primary/5 transition-colors duration-500 bg-white">
         <div className="container mx-auto px-10 py-6 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <span className="text-3xl font-serif font-bold tracking-tighter text-primary">OMI</span>
@@ -321,18 +280,6 @@ export default function App() {
           </div>
 
           <div className="hidden lg:flex gap-12 items-center">
-            {/* Theme Toggle */}
-            <div className="flex gap-2 mr-8 p-1 bg-primary/5 rounded-full">
-              {Object.keys(THEMES).map((t) => (
-                <button 
-                  key={t}
-                  onClick={() => setCurrentTheme(t as keyof typeof THEMES)}
-                  className={`w-4 h-4 rounded-full transition-all ${currentTheme === t ? 'scale-125 ring-2 ring-secondary' : 'opacity-40 hover:opacity-100'}`}
-                  style={{ backgroundColor: THEMES[t as keyof typeof THEMES].secondary }}
-                  title={t}
-                />
-              ))}
-            </div>
             {['Home', 'Portfolio', 'Global', 'Contact'].map((item) => (
               <a key={item} href={`#${item === 'Contact' ? 'inquiry' : item.toLowerCase()}`} className="text-[11px] uppercase tracking-[0.2em] font-bold text-primary/60 hover:text-secondary transition-colors">
                 {item}
@@ -356,19 +303,8 @@ export default function App() {
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            className={`fixed inset-0 z-40 pt-32 px-10 md:hidden ${theme.nav}`}
+            className="fixed inset-0 z-40 bg-white pt-32 px-10 md:hidden"
           >
-            <div className="flex gap-4 mb-12">
-              {Object.keys(THEMES).map((t) => (
-                <button 
-                  key={t}
-                  onClick={() => setCurrentTheme(t as keyof typeof THEMES)}
-                  className={`px-4 py-2 text-[10px] uppercase font-bold tracking-widest border transition-all ${currentTheme === t ? 'bg-primary text-white border-primary' : 'border-primary/10 text-primary/40'}`}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
             {['Home', 'Portfolio', 'Global', 'Contact'].map((item) => (
               <a key={item} href={`#${item === 'Contact' ? 'inquiry' : item.toLowerCase()}`} onClick={() => setIsMenuOpen(false)} className="block text-3xl font-serif mb-8 text-primary border-b border-primary/5 pb-4">{item}</a>
             ))}
@@ -513,7 +449,7 @@ export default function App() {
                   className="group"
                 >
                   <TiltCard>
-                    <div className={`arch-container aspect-[4/5] mb-8 shadow-2xl overflow-hidden transition-colors duration-500 ${theme.card}`}>
+                    <div className="arch-container aspect-[4/5] mb-8 shadow-2xl overflow-hidden transition-colors duration-500 bg-accent/20">
                       <img 
                         src={listing.img} 
                         alt={listing.title} 
