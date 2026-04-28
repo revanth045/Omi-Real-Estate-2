@@ -18,8 +18,8 @@ const LISTINGS: Listing[] = [
   { id: 1, title: "Royal Heritage Villas", price: "$4.5M", loc: "Malibu, CA", sqft: "5,400 sqft", category: "Villas", img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=1200" },
   { id: 2, title: "Emerald Farm Lands", price: "$1.2M", loc: "Bozeman, MT", sqft: "12 Acres", category: "Farmlands", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1200" },
   { id: 3, title: "Skyline Plotting", price: "$800k", loc: "Austin, TX", sqft: "2,500 sqft", category: "Plots", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200" },
-  { id: 4, title: "Golden Gate Estate", price: "$7.8M", loc: "San Francisco, CA", sqft: "8,200 sqft", category: "Villas", img: "https://images.unsplash.com/photo-1600585154340-be6199f7a096?auto=format&fit=crop&q=80&w=1200" },
-  { id: 5, title: "Desert Bloom Acres", price: "$2.1M", loc: "Scottsdale, AZ", sqft: "50 Acres", category: "Farmlands", img: "https://images.unsplash.com/photo-1600566753190-17f0bcd2a6c4?auto=format&fit=crop&q=80&w=1200" },
+  { id: 4, title: "Golden Gate Estate", price: "$7.8M", loc: "San Francisco, CA", sqft: "8,200 sqft", category: "Villas", img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=1200" },
+  { id: 5, title: "Desert Bloom Acres", price: "$2.1M", loc: "Scottsdale, AZ", sqft: "50 Acres", category: "Farmlands", img: "https://images.unsplash.com/photo-1551882547-ff43c63e1c04?auto=format&fit=crop&q=80&w=1200" },
   { id: 6, title: "Metropolis Plots", price: "$1.5M", loc: "Seattle, WA", sqft: "4,000 sqft", category: "Plots", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200" },
 ];
 
@@ -128,7 +128,7 @@ export default function App() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-primary/60 z-10" />
           <img 
-            src="https://images.unsplash.com/photo-1600585154340-be6199f7a096?auto=format&fit=crop&q=80&w=2400" 
+            src="https://images.unsplash.com/photo-1600585154526-990dcea4db0d?auto=format&fit=crop&q=80&w=2400" 
             className="w-full h-full object-cover" 
           />
         </div>
