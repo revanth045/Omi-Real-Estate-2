@@ -126,7 +126,7 @@ export default function App() {
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-primary/40 z-10" />
+          <div className="absolute inset-0 bg-primary/10 z-10" />
           <img 
             src="https://images.unsplash.com/photo-1600585154340-be6199f7a096?auto=format&fit=crop&q=80&w=2400" 
             className="w-full h-full object-cover" 
@@ -264,7 +264,7 @@ export default function App() {
               />
               <img 
                 src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=1200" 
-                className="w-full h-full object-cover grayscale opacity-40 rounded-full scale-90" 
+                className="w-full h-full object-cover rounded-full scale-95" 
               />
             </div>
             <div className="order-1 lg:order-2">
