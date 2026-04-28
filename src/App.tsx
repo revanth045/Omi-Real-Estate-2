@@ -38,6 +38,13 @@ const TESTIMONIALS = [
   { id: 3, name: "Marcus Chen", role: "Investment Steward", content: "Professionalism meets deep-rooted heritage. Their mapping technology saved us months of site analysis.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200" },
 ];
 
+const FAQS = [
+  { id: 1, q: "How do you source off-market properties?", a: "We utilize a proprietary network of multi-generational land owners and advanced mapping data to identify properties before they reach the public market." },
+  { id: 2, q: "Are water and mineral rights included?", a: "Site-specific analysis of water and mineral rights is a core part of our due diligence process for every acquisition." },
+  { id: 3, q: "What is the typical acquisition timeline?", a: "Timelines vary by parcel complexity, but typically range from 45 to 90 days for full legal and environmental verification." },
+  { id: 4, q: "Do you offer custom villa development?", a: "Yes, we partner with premier architects to provide bespoke design-build services for our land stewardship clients." },
+];
+
 // --- Components ---
 
 const ProgressBar = ({ label, value }: { label: string, value: number }) => {
@@ -56,6 +63,32 @@ const ProgressBar = ({ label, value }: { label: string, value: number }) => {
           className="h-full bg-primary origin-left"
         />
       </div>
+    </div>
+  );
+};
+
+const FAQItem = ({ q, a }: { q: string, a: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-primary/10 py-6">
+      <button onClick={() => setIsOpen(!isOpen)} className="w-full flex justify-between items-center text-left group">
+        <span className="text-lg font-serif font-bold text-primary group-hover:text-secondary transition-colors">{q}</span>
+        <motion.div animate={{ rotate: isOpen ? 180 : 0 }} className="text-secondary">
+          <ChevronRight className="w-5 h-5" />
+        </motion.div>
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <p className="pt-4 text-primary/60 text-sm leading-relaxed max-w-2xl">{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -322,6 +355,28 @@ export default function App() {
                 </div>
               </ScaleIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-32 bg-accent">
+        <div className="container mx-auto px-10">
+          <div className="grid lg:grid-cols-12 gap-20">
+            <div className="lg:col-span-5">
+              <Reveal>
+                <p className="text-secondary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">Inquiries</p>
+                <h2 className="text-4xl md:text-6xl font-serif font-bold text-primary mb-8">Frequently <br />Asked.</h2>
+                <p className="text-primary/60 text-sm leading-relaxed">
+                  Clear answers for significant land stewardship. If you have specific questions, please reach out to our team.
+                </p>
+              </Reveal>
+            </div>
+            <div className="lg:col-span-7">
+              {FAQS.map((faq) => (
+                <FAQItem key={faq.id} q={faq.q} a={faq.a} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
