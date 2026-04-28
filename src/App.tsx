@@ -618,7 +618,7 @@ export default function App() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-32 bg-white">
+      <section className="py-32 bg-[#F7F3EF]">
         <div className="container mx-auto px-10">
           <div className="text-center mb-20">
             <Reveal>
@@ -629,7 +629,7 @@ export default function App() {
           <div className="grid md:grid-cols-3 gap-12">
             {TESTIMONIALS.map((t, i) => (
               <ScaleIn key={t.id} delay={i * 0.1}>
-                <div className="p-12 border border-primary/5 bg-accent/20 relative">
+                <div className="p-12 border border-primary/5 bg-white relative shadow-sm">
                   <div className="absolute -top-6 left-12 w-12 h-12 rounded-full overflow-hidden border-4 border-white shadow-lg">
                     <img src={t.img} alt={t.name} className="w-full h-full object-cover" />
                   </div>
