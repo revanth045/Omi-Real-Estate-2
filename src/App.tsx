@@ -58,18 +58,34 @@ const FAQS = [
 
 const ProgressBar = ({ label, value }: { label: string, value: number }) => {
   return (
-    <div className="mb-8">
-      <div className="flex justify-between mb-2 text-xs font-bold uppercase tracking-widest text-primary/60">
-        <span>{label}</span>
-        <span>{value}%</span>
+    <div className="mb-10 last:mb-0">
+      <div className="flex justify-between items-end mb-3">
+        <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-primary/60">{label}</p>
+        <div className="flex items-baseline gap-1">
+          <motion.span 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-xs font-bold text-primary"
+          >
+            {value}
+          </motion.span>
+          <span className="text-[10px] font-bold text-primary/40">%</span>
+        </div>
       </div>
-      <div className="h-[2px] bg-primary/10 w-full overflow-hidden">
+      <div className="h-[1px] w-full bg-primary/10 relative overflow-hidden">
         <motion.div 
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: value / 100 }}
           viewport={{ once: true }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="h-full bg-primary origin-left"
+          transition={{ 
+            type: "spring", 
+            stiffness: 50, 
+            damping: 20, 
+            restDelta: 0.001,
+            delay: 0.1 
+          }}
+          className="absolute top-0 left-0 h-full w-full bg-primary origin-left"
         />
       </div>
     </div>
