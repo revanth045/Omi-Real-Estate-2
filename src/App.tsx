@@ -32,6 +32,12 @@ const METRICS = [
   { label: "Legal Compliance", value: 100 },
 ];
 
+const TESTIMONIALS = [
+  { id: 1, name: "Alexander Sterling", role: "Legacy Partner", content: "Omi's discretion and data-driven approach to land acquisition is unparalleled. They found us a parcel that wasn't even on the market.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200" },
+  { id: 2, name: "Elena Rodriguez", role: "Estate Owner", content: "The transition from vision to heritage was seamless. Omi understands that we aren't just buying land; we are securing a legacy.", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200" },
+  { id: 3, name: "Marcus Chen", role: "Investment Steward", content: "Professionalism meets deep-rooted heritage. Their mapping technology saved us months of site analysis.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200" },
+];
+
 // --- Components ---
 
 const ProgressBar = ({ label, value }: { label: string, value: number }) => {
@@ -292,8 +298,36 @@ export default function App() {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section className="py-32 bg-white">
+        <div className="container mx-auto px-10">
+          <div className="text-center mb-20">
+            <Reveal>
+              <p className="text-secondary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">Testimonials</p>
+              <h2 className="text-4xl md:text-6xl font-serif font-bold text-primary">Voices of Stewardship</h2>
+            </Reveal>
+          </div>
+          <div className="grid md:grid-cols-3 gap-12">
+            {TESTIMONIALS.map((t, i) => (
+              <ScaleIn key={t.id} delay={i * 0.1}>
+                <div className="p-12 border border-primary/5 bg-accent/20 relative">
+                  <div className="absolute -top-6 left-12 w-12 h-12 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                    <img src={t.img} alt={t.name} className="w-full h-full object-cover" />
+                  </div>
+                  <p className="text-primary/70 italic text-sm leading-relaxed mb-8 pt-4">"{t.content}"</p>
+                  <div>
+                    <p className="font-serif font-bold text-primary">{t.name}</p>
+                    <p className="text-[9px] uppercase tracking-widest font-bold text-secondary">{t.role}</p>
+                  </div>
+                </div>
+              </ScaleIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer id="contact" className="py-32 border-t border-primary/5 bg-primary text-white">
+      <footer id="contact" className="py-32 border-t border-primary/5 bg-[#1A1A1A] text-white">
         <div className="container mx-auto px-10">
           <div className="grid md:grid-cols-4 gap-20 mb-20">
             <div className="col-span-2">
