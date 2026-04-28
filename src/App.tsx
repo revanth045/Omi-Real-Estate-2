@@ -41,6 +41,12 @@ const TESTIMONIALS = [
   { id: 3, name: "Marcus Chen", role: "Investment Steward", content: "Professionalism meets deep-rooted heritage. Their mapping technology saved us months of site analysis.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200" },
 ];
 
+const ONGOING_PROJECTS = [
+  { id: 1, title: "Veridian Enclave", status: "Groundbreaking", completion: "Q4 2025", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" },
+  { id: 2, title: "Azure Heights", status: "Structural Phase", completion: "Q2 2026", img: "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&q=80&w=1200" },
+  { id: 3, title: "Marble Arch Villas", status: "Interior Finishing", completion: "Q3 2024", img: "https://images.unsplash.com/photo-1600607687940-4e524cb35d03?auto=format&fit=crop&q=80&w=1200" },
+];
+
 const FAQS = [
   { id: 1, q: "How do you source off-market properties?", a: "We utilize a proprietary network of multi-generational land owners and advanced mapping data to identify properties before they reach the public market." },
   { id: 2, q: "Are water and mineral rights included?", a: "Site-specific analysis of water and mineral rights is a core part of our due diligence process for every acquisition." },
@@ -243,6 +249,35 @@ export default function App() {
         </div>
       </section>
 
+      {/* Ongoing Projects */}
+      <section className="py-32 bg-primary text-white overflow-hidden">
+        <div className="container mx-auto px-10">
+          <div className="flex justify-between items-end mb-20">
+            <Reveal>
+              <p className="text-secondary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">Future Living</p>
+              <h2 className="text-4xl md:text-6xl font-serif font-bold">Ongoing <br /><span className="italic font-light">Developments.</span></h2>
+            </Reveal>
+            <button className="hidden md:block px-8 py-3 border border-white/20 text-[10px] uppercase tracking-widest font-bold hover:bg-white hover:text-primary transition-all">
+              Join Waitlist
+            </button>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {ONGOING_PROJECTS.map((project) => (
+              <div key={project.id} className="group cursor-pointer">
+                <div className="relative aspect-[16/10] overflow-hidden mb-6">
+                  <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" />
+                  <div className="absolute top-4 left-4 bg-secondary px-3 py-1 text-[8px] uppercase tracking-widest font-bold">
+                    {project.status}
+                  </div>
+                </div>
+                <h3 className="text-xl font-serif font-bold mb-2">{project.title}</h3>
+                <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Estimated Completion: {project.completion}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Project Explorer (Tabbed) */}
       <section id="portfolio" className="py-32">
         <div className="container mx-auto px-10">
@@ -340,6 +375,73 @@ export default function App() {
                   ))}
                 </div>
               </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section id="inquiry" className="py-32 bg-white">
+        <div className="container mx-auto px-10">
+          <div className="max-w-6xl mx-auto bg-accent p-12 md:p-20 shadow-2xl border border-primary/5">
+            <div className="grid lg:grid-cols-2 gap-20">
+              <div>
+                <Reveal>
+                  <p className="text-secondary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">Get In Touch</p>
+                  <h2 className="text-4xl md:text-6xl font-serif font-bold text-primary mb-10">Start Your <br />Legacy.</h2>
+                  <p className="text-primary/60 text-sm leading-relaxed mb-12">
+                    Our stewardship advisors are ready to help you find the perfect parcel or villa for your future. Fill out the form and we will reach out within 24 hours.
+                  </p>
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-6">
+                      <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white">
+                        <Phone className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-[9px] uppercase tracking-widest font-bold text-primary/40">Direct Line</p>
+                        <p className="font-bold text-primary">+1 (406) 555-0198</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white">
+                        <Mail className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-[9px] uppercase tracking-widest font-bold text-primary/40">Email Inquiry</p>
+                        <p className="font-bold text-primary">heritage@omi.com</p>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              </div>
+              <form className="space-y-8">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-primary/60">Full Name</label>
+                    <input type="text" className="w-full bg-white border-b border-primary/20 py-3 focus:outline-none focus:border-secondary transition-colors" placeholder="John Doe" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] uppercase tracking-widest font-bold text-primary/60">Email Address</label>
+                    <input type="email" className="w-full bg-white border-b border-primary/20 py-3 focus:outline-none focus:border-secondary transition-colors" placeholder="john@example.com" />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase tracking-widest font-bold text-primary/60">Property Interest</label>
+                  <select className="w-full bg-white border-b border-primary/20 py-3 focus:outline-none focus:border-secondary transition-colors appearance-none">
+                    <option>Villas</option>
+                    <option>Farmlands</option>
+                    <option>Plots</option>
+                    <option>General Inquiry</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase tracking-widest font-bold text-primary/60">Your Message</label>
+                  <textarea rows={4} className="w-full bg-white border-b border-primary/20 py-3 focus:outline-none focus:border-secondary transition-colors" placeholder="Tell us about your requirements..."></textarea>
+                </div>
+                <button className="w-full py-5 bg-primary text-white text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-secondary transition-all">
+                  Send Inquiry
+                </button>
+              </form>
             </div>
           </div>
         </div>
