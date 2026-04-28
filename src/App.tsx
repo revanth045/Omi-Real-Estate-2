@@ -307,7 +307,10 @@ export default function App() {
                 {item}
               </a>
             ))}
-            <button className="px-8 py-3 bg-primary text-white text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-secondary transition-all">
+            <button 
+              onClick={() => document.getElementById('inquiry')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-3 bg-primary text-white text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-secondary transition-all"
+            >
               Book Visit
             </button>
           </div>
