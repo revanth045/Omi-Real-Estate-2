@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react'
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
+import React, { useState, useRef } from 'react'
+import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Menu, X, Globe2, Compass, Layers, Mail, Search, Map } from 'lucide-react'
 
 // --- Types ---
