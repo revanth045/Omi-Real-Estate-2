@@ -113,6 +113,68 @@ const ScaleIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: n
   </motion.div>
 );
 
+const MagneticButton = ({ children, className }: { children: React.ReactNode, className?: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouse = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const x = clientX - (left + width / 2);
+    const y = clientY - (top + height / 2);
+    setPosition({ x: x * 0.3, y: y * 0.3 });
+  };
+
+  const reset = () => setPosition({ x: 0, y: 0 });
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouse}
+      onMouseLeave={reset}
+      animate={{ x: position.x, y: position.y }}
+      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const TiltCard = ({ children }: { children: React.ReactNode }) => {
+  const x = useSpring(0, { stiffness: 100, damping: 30 });
+  const y = useSpring(0, { stiffness: 100, damping: 30 });
+
+  const handleMouse = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = (mouseX / width - 0.5) * 20;
+    const yPct = (mouseY / height - 0.5) * -20;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      onMouseMove={handleMouse}
+      onMouseLeave={handleLeave}
+      style={{ rotateX: y, rotateY: x, transformStyle: "preserve-3d" }}
+      className="relative"
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
@@ -184,13 +246,16 @@ export default function App() {
 
       {/* Hero Section */}
       <section id="home" className="relative h-[85vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+        <motion.div 
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, 200]) }}
+          className="absolute inset-0 z-0"
+        >
           <div className="absolute inset-0 bg-[#2F3E46]/80 z-10" />
           <img 
             src="https://images.unsplash.com/photo-1600585154526-990dcea4db0d?auto=format&fit=crop&q=80&w=2400" 
-            className="w-full h-full object-cover" 
+            className="w-full h-full object-cover scale-110" 
           />
-        </div>
+        </motion.div>
 
         <div className="container mx-auto px-10 relative z-20 text-white">
           <Reveal>
@@ -206,12 +271,16 @@ export default function App() {
               Bespoke villas, lush farmlands, and premium plots curated for those who seek the extraordinary.
             </p>
             <div className="flex gap-8">
-              <a href="#portfolio" className="px-10 py-4 bg-secondary text-white font-bold text-[10px] uppercase tracking-widest hover:bg-white hover:text-primary transition-all inline-block">
-                View Projects
-              </a>
-              <a href="#inquiry" className="px-10 py-4 border border-white/30 text-white font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all inline-block">
-                Contact Us
-              </a>
+              <MagneticButton>
+                <a href="#portfolio" className="px-10 py-4 bg-secondary text-white font-bold text-[10px] uppercase tracking-widest hover:bg-white hover:text-primary transition-all inline-block">
+                  View Projects
+                </a>
+              </MagneticButton>
+              <MagneticButton>
+                <a href="#inquiry" className="px-10 py-4 border border-white/30 text-white font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all inline-block">
+                  Contact Us
+                </a>
+              </MagneticButton>
             </div>
           </Reveal>
         </div>
@@ -311,18 +380,20 @@ export default function App() {
                   transition={{ duration: 0.5 }}
                   className="group"
                 >
-                  <div className="arch-container aspect-[4/5] mb-8 shadow-2xl">
-                    <img 
-                      src={listing.img} 
-                      alt={listing.title} 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-all duration-[1.5s] ease-out"
-                    />
-                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                      <button className="px-6 py-3 bg-white text-primary text-[9px] uppercase tracking-widest font-bold translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                        View Details
-                      </button>
+                  <TiltCard>
+                    <div className="arch-container aspect-[4/5] mb-8 shadow-2xl overflow-hidden">
+                      <img 
+                        src={listing.img} 
+                        alt={listing.title} 
+                        className="w-full h-full object-cover group-hover:scale-110 transition-all duration-[1.5s] ease-out"
+                      />
+                      <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <button className="px-6 py-3 bg-white text-primary text-[9px] uppercase tracking-widest font-bold translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                          View Details
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  </TiltCard>
                   <div className="flex justify-between items-start">
                     <div>
                       <h3 className="text-xl font-serif font-bold text-primary mb-1">{listing.title}</h3>
