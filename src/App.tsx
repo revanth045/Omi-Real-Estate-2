@@ -662,7 +662,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="py-32 border-t border-primary/5 bg-[#1A1A1A] text-white">
+      <footer id="contact" className="py-32 border-t border-primary/5 bg-[#2D3B2D] text-white">
         <div className="container mx-auto px-10">
           <div className="grid md:grid-cols-4 gap-20 mb-20">
             <div className="col-span-2">
