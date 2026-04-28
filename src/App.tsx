@@ -668,23 +668,23 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="py-32 border-t border-primary/5 bg-[#EBE7E0] text-primary">
+      <footer id="contact" className="py-32 border-t border-primary/5 bg-[#2D3B2D] text-white">
         <div className="container mx-auto px-10">
           <div className="grid md:grid-cols-4 gap-20 mb-20">
             <div className="col-span-2">
-              <span className="text-3xl font-serif font-bold text-primary mb-8 block">OMI</span>
-              <p className="text-primary/60 text-sm leading-relaxed max-w-xs mb-10">
+              <span className="text-3xl font-serif font-bold text-white mb-8 block">OMI</span>
+              <p className="text-white/50 text-sm leading-relaxed max-w-xs mb-10">
                 Crafting luxury spaces and heritage farmlands for the modern steward. Professionalism meets vision.
               </p>
-              <div className="flex gap-6 text-primary/30">
+              <div className="flex gap-6 text-white/30">
                 <Instagram className="w-5 h-5 hover:text-secondary cursor-pointer" />
                 <Linkedin className="w-5 h-5 hover:text-secondary cursor-pointer" />
                 <Twitter className="w-5 h-5 hover:text-secondary cursor-pointer" />
               </div>
             </div>
             <div>
-              <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-primary mb-10">Links</h4>
-              <div className="space-y-4 text-xs font-bold text-primary/60">
+              <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-white mb-10">Links</h4>
+              <div className="space-y-4 text-xs font-bold text-white/50">
                 <p className="hover:text-secondary cursor-pointer transition-colors">Villas</p>
                 <p className="hover:text-secondary cursor-pointer transition-colors">Plots</p>
                 <p className="hover:text-secondary cursor-pointer transition-colors">Farmlands</p>
@@ -692,21 +692,21 @@ export default function App() {
               </div>
             </div>
             <div>
-              <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-primary mb-10">Contact</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-white mb-10">Contact</h4>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <Phone className="w-4 h-4 text-secondary" />
-                  <span className="text-xs font-bold text-primary/80">+1 (406) 555-0198</span>
+                  <span className="text-xs font-bold text-white/80">+1 (406) 555-0198</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <Mail className="w-4 h-4 text-secondary" />
-                  <span className="text-xs font-bold text-primary/80">inquiry@omirealestate.com</span>
+                  <span className="text-xs font-bold text-white/80">inquiry@omirealestate.com</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="pt-10 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-[9px] uppercase tracking-[0.4em] text-primary/20 font-bold">
+          <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-bold">
               © 2024 OMI REAL ESTATE HERITAGE. ALL RIGHTS RESERVED.
             </p>
           </div>
