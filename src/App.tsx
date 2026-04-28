@@ -21,6 +21,9 @@ const LISTINGS: Listing[] = [
   { id: 4, title: "Golden Gate Estate", price: "$7.8M", loc: "San Francisco, CA", sqft: "8,200 sqft", category: "Villas", img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=1200" },
   { id: 5, title: "Sedona Red Rock Estate", price: "$2.1M", loc: "Arizona, USA", sqft: "50 Acres", category: "Farmlands", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200" },
   { id: 6, title: "Metropolis Plots", price: "$1.5M", loc: "Seattle, WA", sqft: "4,000 sqft", category: "Plots", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200" },
+  { id: 7, title: "Aspen Peak Retreat", price: "$6.2M", loc: "Aspen, CO", sqft: "6,500 sqft", category: "Villas", img: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&q=80&w=1200" },
+  { id: 8, title: "Savannah Green Fields", price: "$1.8M", loc: "Savannah, GA", sqft: "25 Acres", category: "Farmlands", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1200" },
+  { id: 9, title: "Coastal Driftwood Plot", price: "$950k", loc: "Cannon Beach, OR", sqft: "3,200 sqft", category: "Plots", img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80&w=1200" },
 ];
 
 const CATEGORIES = ["All", "Villas", "Farmlands", "Plots"];
