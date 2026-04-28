@@ -418,16 +418,16 @@ export default function App() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase tracking-widest font-bold text-primary/60">Full Name</label>
-                    <input type="text" className="w-full bg-white border-b border-primary/20 py-3 focus:outline-none focus:border-secondary transition-colors" placeholder="John Doe" />
+                    <input type="text" className="w-full bg-white border-b border-primary/20 py-3 px-4 focus:outline-none focus:border-secondary transition-colors" placeholder="John Doe" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] uppercase tracking-widest font-bold text-primary/60">Email Address</label>
-                    <input type="email" className="w-full bg-white border-b border-primary/20 py-3 focus:outline-none focus:border-secondary transition-colors" placeholder="john@example.com" />
+                    <input type="email" className="w-full bg-white border-b border-primary/20 py-3 px-4 focus:outline-none focus:border-secondary transition-colors" placeholder="john@example.com" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase tracking-widest font-bold text-primary/60">Property Interest</label>
-                  <select className="w-full bg-white border-b border-primary/20 py-3 focus:outline-none focus:border-secondary transition-colors appearance-none">
+                  <select className="w-full bg-white border-b border-primary/20 py-3 px-4 focus:outline-none focus:border-secondary transition-colors appearance-none">
                     <option>Villas</option>
                     <option>Farmlands</option>
                     <option>Plots</option>
@@ -436,7 +436,7 @@ export default function App() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase tracking-widest font-bold text-primary/60">Your Message</label>
-                  <textarea rows={4} className="w-full bg-white border-b border-primary/20 py-3 focus:outline-none focus:border-secondary transition-colors" placeholder="Tell us about your requirements..."></textarea>
+                  <textarea rows={4} className="w-full bg-white border-b border-primary/20 py-3 px-4 focus:outline-none focus:border-secondary transition-colors" placeholder="Tell us about your requirements..."></textarea>
                 </div>
                 <button className="w-full py-5 bg-primary text-white text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-secondary transition-all">
                   Send Inquiry
