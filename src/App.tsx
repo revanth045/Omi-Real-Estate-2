@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Menu, X, Globe2, Compass, Layers, Phone, Mail, Instagram, Linkedin, Twitter, CheckCircle2, ChevronRight } from 'lucide-react'
+import { ArrowRight, Menu, X, Globe2, Layers, Phone, Mail, Instagram, Linkedin, Twitter, CheckCircle2, ChevronRight } from 'lucide-react'
 
 // --- Types ---
 interface Listing {
@@ -466,7 +466,7 @@ export default function App() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             <AnimatePresence mode="wait">
-              {filteredListings.map((listing, i) => (
+              {filteredListings.map((listing) => (
                 <motion.div
                   key={listing.id}
                   layout
