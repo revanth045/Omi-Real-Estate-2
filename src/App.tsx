@@ -43,8 +43,8 @@ const TESTIMONIALS = [
 
 const ONGOING_PROJECTS = [
   { id: 1, title: "Veridian Enclave", status: "Groundbreaking", completion: "Q4 2025", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" },
-  { id: 2, title: "Azure Heights", status: "Structural Phase", completion: "Q2 2026", img: "https://images.unsplash.com/photo-1449156001446-d419672010ba?auto=format&fit=crop&q=80&w=1200" },
-  { id: 3, title: "Marble Arch Villas", status: "Interior Finishing", completion: "Q3 2024", img: "https://images.unsplash.com/photo-1600607687940-4e524cb35d03?auto=format&fit=crop&q=80&w=1200" },
+  { id: 2, title: "Azure Heights", status: "Structural Phase", completion: "Q2 2026", img: "https://images.unsplash.com/photo-1545324418-f1d3ac1ef739?auto=format&fit=crop&q=80&w=1200" },
+  { id: 3, title: "Marble Arch Villas", status: "Interior Finishing", completion: "Q3 2024", img: "https://images.unsplash.com/photo-1600585154340-be6199f7a096?auto=format&fit=crop&q=80&w=1200" },
 ];
 
 const FAQS = [
@@ -250,7 +250,7 @@ export default function App() {
       </section>
 
       {/* Ongoing Projects */}
-      <section className="py-32 bg-[#3E4A3E] text-white overflow-hidden">
+      <section className="py-32 bg-[#252A25] text-white overflow-hidden">
         <div className="container mx-auto px-10">
           <div className="flex justify-between items-end mb-20">
             <Reveal>
