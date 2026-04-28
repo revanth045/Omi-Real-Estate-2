@@ -393,14 +393,14 @@ export default function App() {
       </section>
 
       {/* Ongoing Projects */}
-      <section className="py-32 bg-[#252A25] text-white overflow-hidden">
+      <section className="py-32 bg-[#F2EBE3] text-primary overflow-hidden">
         <div className="container mx-auto px-10">
           <div className="flex justify-between items-end mb-20">
             <Reveal>
               <p className="text-secondary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">Future Living</p>
-              <h2 className="text-4xl md:text-6xl font-serif font-bold">Ongoing <br /><span className="italic font-light">Developments.</span></h2>
+              <h2 className="text-4xl md:text-6xl font-serif font-bold text-primary">Ongoing <br /><span className="italic font-light">Developments.</span></h2>
             </Reveal>
-            <button className="hidden md:block px-8 py-3 border border-white/20 text-[10px] uppercase tracking-widest font-bold hover:bg-white hover:text-primary transition-all">
+            <button className="hidden md:block px-8 py-3 border border-primary/20 text-[10px] uppercase tracking-widest font-bold hover:bg-primary hover:text-white transition-all text-primary">
               Join Waitlist
             </button>
           </div>
@@ -409,12 +409,12 @@ export default function App() {
               <div key={project.id} className="group cursor-pointer">
                 <div className="relative aspect-[16/10] overflow-hidden mb-6">
                   <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" />
-                  <div className="absolute top-4 left-4 bg-secondary px-3 py-1 text-[8px] uppercase tracking-widest font-bold">
+                  <div className="absolute top-4 left-4 bg-secondary px-3 py-1 text-[8px] uppercase tracking-widest font-bold text-white">
                     {project.status}
                   </div>
                 </div>
-                <h3 className="text-xl font-serif font-bold mb-2">{project.title}</h3>
-                <p className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Estimated Completion: {project.completion}</p>
+                <h3 className="text-xl font-serif font-bold mb-2 text-primary">{project.title}</h3>
+                <p className="text-[10px] uppercase tracking-widest text-primary/40 font-bold">Estimated Completion: {project.completion}</p>
               </div>
             ))}
           </div>
