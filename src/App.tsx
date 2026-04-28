@@ -43,7 +43,7 @@ const TESTIMONIALS = [
 
 const ONGOING_PROJECTS = [
   { id: 1, title: "Veridian Enclave", status: "Groundbreaking", completion: "Q4 2025", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" },
-  { id: 2, title: "Azure Heights", status: "Structural Phase", completion: "Q2 2026", img: "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&q=80&w=1200" },
+  { id: 2, title: "Azure Heights", status: "Structural Phase", completion: "Q2 2026", img: "https://images.unsplash.com/photo-1449156001446-d419672010ba?auto=format&fit=crop&q=80&w=1200" },
   { id: 3, title: "Marble Arch Villas", status: "Interior Finishing", completion: "Q3 2024", img: "https://images.unsplash.com/photo-1600607687940-4e524cb35d03?auto=format&fit=crop&q=80&w=1200" },
 ];
 
@@ -151,7 +151,7 @@ export default function App() {
 
           <div className="hidden lg:flex gap-12 items-center">
             {['Home', 'Portfolio', 'Global', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="text-[11px] uppercase tracking-[0.2em] font-bold text-primary/60 hover:text-secondary transition-colors">
+              <a key={item} href={`#${item === 'Contact' ? 'inquiry' : item.toLowerCase()}`} className="text-[11px] uppercase tracking-[0.2em] font-bold text-primary/60 hover:text-secondary transition-colors">
                 {item}
               </a>
             ))}
@@ -175,8 +175,8 @@ export default function App() {
             exit={{ opacity: 0, x: '100%' }}
             className="fixed inset-0 z-40 bg-white pt-32 px-10 md:hidden"
           >
-            {['Home', 'Villas', 'Plots', 'Farmlands', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsMenuOpen(false)} className="block text-3xl font-serif mb-8 text-primary border-b border-primary/5 pb-4">{item}</a>
+            {['Home', 'Portfolio', 'Global', 'Contact'].map((item) => (
+              <a key={item} href={`#${item === 'Contact' ? 'inquiry' : item.toLowerCase()}`} onClick={() => setIsMenuOpen(false)} className="block text-3xl font-serif mb-8 text-primary border-b border-primary/5 pb-4">{item}</a>
             ))}
           </motion.div>
         )}
@@ -250,7 +250,7 @@ export default function App() {
       </section>
 
       {/* Ongoing Projects */}
-      <section className="py-32 bg-primary text-white overflow-hidden">
+      <section className="py-32 bg-[#3E4A3E] text-white overflow-hidden">
         <div className="container mx-auto px-10">
           <div className="flex justify-between items-end mb-20">
             <Reveal>
