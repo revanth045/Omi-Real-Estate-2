@@ -360,8 +360,8 @@ export default function App() {
               Redefining <br />
               <span className="italic font-light">Excellence.</span>
             </h1>
-            <p className="text-white/80 max-w-xl text-lg font-light leading-relaxed mb-12">
-              Bespoke villas, lush farmlands, and premium plots curated for those who seek the extraordinary.
+            <p className="text-lg md:text-xl text-white/80 max-w-2xl mb-12 leading-relaxed">
+              Crafting a legacy of timeless elegance with a curated collection of architectural masterpieces and fertile heritage estates, designed for the modern steward.
             </p>
             <div className="flex gap-8">
               <MagneticButton>
