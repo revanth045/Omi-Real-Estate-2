@@ -416,7 +416,10 @@ export default function App() {
               <p className="text-secondary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">Future Living</p>
               <h2 className="text-4xl md:text-6xl font-serif font-bold text-primary">Ongoing <br /><span className="italic font-light">Developments.</span></h2>
             </Reveal>
-            <button className="hidden md:block px-8 py-3 border border-primary/20 text-[10px] uppercase tracking-widest font-bold hover:bg-primary hover:text-white transition-all text-primary">
+            <button 
+              onClick={() => document.getElementById('inquiry')?.scrollIntoView({ behavior: 'smooth' })}
+              className="hidden md:block px-8 py-3 border border-primary/20 text-[10px] uppercase tracking-widest font-bold hover:bg-primary hover:text-white transition-all text-primary"
+            >
               Join Waitlist
             </button>
           </div>
