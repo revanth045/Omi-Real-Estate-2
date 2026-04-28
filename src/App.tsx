@@ -345,7 +345,7 @@ export default function App() {
         >
           <div className="absolute inset-0 bg-[#2F3E46]/80 z-10" />
           <img 
-            src="https://images.unsplash.com/photo-1600585154526-990dcea4db0d?auto=format&fit=crop&q=80&w=2400" 
+            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2400" 
             className="w-full h-full object-cover scale-110" 
           />
         </motion.div>
@@ -356,9 +356,9 @@ export default function App() {
               <div className="gold-line" />
               <p className="text-[10px] uppercase tracking-[0.5em] font-bold text-secondary">Discover Your Dream Space</p>
             </div>
-            <h1 className="text-6xl md:text-[100px] font-serif font-bold leading-none mb-10">
-              Redefining <br />
-              <span className="italic font-light">Excellence.</span>
+            <h1 className="text-6xl md:text-[100px] font-serif font-bold leading-[0.9] mb-10">
+              Where Land <br />
+              <span className="text-secondary italic font-light">Meets Legacy.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/80 max-w-2xl mb-12 leading-relaxed">
               Crafting a legacy of timeless elegance with a curated collection of architectural masterpieces and fertile heritage estates, designed for the modern steward.
