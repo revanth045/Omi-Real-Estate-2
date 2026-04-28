@@ -290,20 +290,20 @@ export default function App() {
       <motion.div className="fixed top-0 left-0 right-0 h-[3px] bg-secondary z-[100] origin-left" style={{ scaleX }} />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 shadow-sm border-b border-primary/5 transition-colors duration-500 bg-white">
+      <nav className="absolute top-0 w-full z-50 transition-colors duration-500 bg-transparent">
         <div className="container mx-auto px-10 py-6 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <span className="text-3xl font-serif font-bold tracking-tighter text-primary">OMI</span>
-            <div className="h-6 w-px bg-primary/10 hidden md:block" />
+            <span className="text-3xl font-serif font-bold tracking-tighter text-white">OMI</span>
+            <div className="h-6 w-px bg-white/20 hidden md:block" />
             <div className="hidden md:flex flex-col">
-              <span className="text-[8px] uppercase tracking-[0.4em] font-bold text-primary/40 leading-none">Luxury Heritage</span>
+              <span className="text-[8px] uppercase tracking-[0.4em] font-bold text-white/40 leading-none">Luxury Heritage</span>
               <span className="text-[8px] uppercase tracking-[0.4em] font-bold text-secondary leading-none mt-1">Properties</span>
             </div>
           </div>
 
           <div className="hidden lg:flex gap-12 items-center">
             {['Home', 'Portfolio', 'Global', 'Contact'].map((item) => (
-              <a key={item} href={`#${item === 'Contact' ? 'inquiry' : item.toLowerCase()}`} className="text-[11px] uppercase tracking-[0.2em] font-bold text-primary/60 hover:text-secondary transition-colors">
+              <a key={item} href={`#${item === 'Contact' ? 'inquiry' : item.toLowerCase()}`} className="text-[11px] uppercase tracking-[0.2em] font-bold text-white/80 hover:text-secondary transition-colors">
                 {item}
               </a>
             ))}
@@ -338,7 +338,7 @@ export default function App() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section id="home" className="relative h-[85vh] flex items-center overflow-hidden">
+      <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
         <motion.div 
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 200]) }}
           className="absolute inset-0 z-0"
