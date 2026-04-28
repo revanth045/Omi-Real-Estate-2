@@ -185,7 +185,7 @@ export default function App() {
       {/* Hero Section */}
       <section id="home" className="relative h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-primary/60 z-10" />
+          <div className="absolute inset-0 bg-[#2F3E46]/80 z-10" />
           <img 
             src="https://images.unsplash.com/photo-1600585154526-990dcea4db0d?auto=format&fit=crop&q=80&w=2400" 
             className="w-full h-full object-cover" 
@@ -206,12 +206,12 @@ export default function App() {
               Bespoke villas, lush farmlands, and premium plots curated for those who seek the extraordinary.
             </p>
             <div className="flex gap-8">
-              <button className="px-10 py-4 bg-secondary text-white font-bold text-[10px] uppercase tracking-widest hover:bg-white hover:text-primary transition-all">
+              <a href="#portfolio" className="px-10 py-4 bg-secondary text-white font-bold text-[10px] uppercase tracking-widest hover:bg-white hover:text-primary transition-all inline-block">
                 View Projects
-              </button>
-              <button className="px-10 py-4 border border-white/30 text-white font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all">
+              </a>
+              <a href="#inquiry" className="px-10 py-4 border border-white/30 text-white font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all inline-block">
                 Contact Us
-              </button>
+              </a>
             </div>
           </Reveal>
         </div>
