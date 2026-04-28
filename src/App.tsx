@@ -159,7 +159,7 @@ export default function App() {
       </section>
 
       {/* Stats/Quality Metrics */}
-      <section id="metrics" className="py-24 bg-primary/5">
+      <section id="metrics" className="py-24 bg-accent">
         <div className="container mx-auto px-10">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
@@ -253,14 +253,14 @@ export default function App() {
       </section>
 
       {/* Global & Expertise */}
-      <section id="global" className="py-32 bg-primary text-white overflow-hidden relative">
+      <section id="global" className="py-32 bg-accent/50 text-primary overflow-hidden relative">
         <div className="container mx-auto px-10 relative z-10">
           <div className="grid lg:grid-cols-2 gap-32 items-center">
             <div className="order-2 lg:order-1 relative aspect-square">
               <motion.div 
                 animate={{ rotate: 360 }}
                 transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 border border-white/5 rounded-full"
+                className="absolute inset-0 border border-primary/5 rounded-full"
               />
               <img 
                 src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=1200" 
@@ -270,7 +270,7 @@ export default function App() {
             <div className="order-1 lg:order-2">
               <Reveal>
                 <div className="gold-line mb-10" />
-                <h2 className="text-4xl md:text-7xl font-serif font-bold mb-14 leading-none">Global <br /><span className="italic font-light">Reach.</span></h2>
+                <h2 className="text-4xl md:text-7xl font-serif font-bold mb-14 leading-none text-primary">Global <br /><span className="italic font-light">Reach.</span></h2>
                 <div className="space-y-12">
                   {[
                     { icon: <CheckCircle2 className="text-secondary" />, title: "Transparency", desc: "Every project is legally verified and titles are 100% clear." },
@@ -281,7 +281,7 @@ export default function App() {
                       <div className="flex-shrink-0 mt-1">{item.icon}</div>
                       <div>
                         <h3 className="text-xl font-serif font-bold mb-2">{item.title}</h3>
-                        <p className="text-white/50 text-sm font-light leading-relaxed">{item.desc}</p>
+                        <p className="text-primary/50 text-sm font-light leading-relaxed">{item.desc}</p>
                       </div>
                     </div>
                   ))}
