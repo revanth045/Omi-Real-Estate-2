@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --primary: #2D3436;      /* Deep Charcoal */
-  --secondary: #B08968;    /* Warm Sandstone */
-  --accent: #7F5539;       /* Earthy Brown */
-  --background: #FDFCF0;   /* Creamy Paper */
-  --foreground: #2D3436;
+  --primary: #003366;      /* Deep Navy Blue */
+  --secondary: #DA9100;    /* Heritage Gold */
+  --accent: #F4F4F4;       /* Light Grey */
+  --background: #FFFFFF;   /* Clean White */
+  --foreground: #1F1F1F;   /* Dark Charcoal */
   --card: #FFFFFF;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   overflow-x: hidden;
 }
 
@@ -22,25 +22,31 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
-.gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+.nav-link {
+  @apply text-[11px] uppercase tracking-[0.2em] font-bold text-primary/70 transition-colors duration-300;
 }
 
-.glass-card {
-  @apply bg-white border border-black/5 shadow-sm rounded-none transition-all duration-500;
+.nav-link:hover, .nav-link.active {
+  @apply text-secondary;
 }
 
-.hover-lift {
-  @apply transition-all duration-500 ease-out;
+.gold-line {
+  @apply w-12 h-[2px] bg-secondary;
 }
 
-.hover-lift:hover {
-  @apply -translate-y-4 shadow-2xl;
+/* Arched Image Container */
+.arch-container {
+  @apply rounded-t-[100px] overflow-hidden relative;
+}
+
+/* Progress Bar Animation */
+.progress-bar {
+  @apply h-1 bg-primary origin-left;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -55,7 +61,6 @@ body {
   background: var(--secondary);
 }
 
-/* Smooth Scroll */
 html {
   scroll-behavior: smooth;
 }

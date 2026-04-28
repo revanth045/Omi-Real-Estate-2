@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Menu, X, Globe2, Compass, Layers, Mail, Search, Map } from 'lucide-react'
+import { ArrowRight, Menu, X, Globe2, Compass, Layers, Phone, Mail, Instagram, Linkedin, Twitter, CheckCircle2, ChevronRight } from 'lucide-react'
 
 // --- Types ---
 interface Listing {
@@ -9,113 +9,99 @@ interface Listing {
   price: string;
   loc: string;
   img: string;
-  acres: string;
+  category: string;
+  sqft: string;
 }
 
 // --- Data ---
 const LISTINGS: Listing[] = [
-  { id: 1, title: "Summit View Estate", price: "$4.5M", loc: "Montana", acres: "1,200 Acres", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1200" },
-  { id: 2, title: "Azure Shoreline", price: "$3.2M", loc: "California", acres: "45 Acres", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200" },
-  { id: 3, title: "Lonestar Territory", price: "$5.8M", loc: "Texas", acres: "2,500 Acres", img: "https://images.unsplash.com/photo-1600585154340-be6199f7a096?auto=format&fit=crop&q=80&w=1200" },
-  { id: 4, title: "Rocky Peak Lodge", price: "$2.1M", loc: "Colorado", acres: "120 Acres", img: "https://images.unsplash.com/photo-1600607687940-4e524cb35d03?auto=format&fit=crop&q=80&w=1200" },
-  { id: 5, title: "Canyon Ridge", price: "$6.4M", loc: "Arizona", acres: "320 Acres", img: "https://images.unsplash.com/photo-1600566753190-17f0bcd2a6c4?auto=format&fit=crop&q=80&w=1200" },
-  { id: 6, title: "Ocean Breeze Manor", price: "$7.9M", loc: "Florida", acres: "12 Acres", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200" },
-  { id: 7, title: "Teton Wilderness", price: "$12.5M", loc: "Wyoming", acres: "4,500 Acres", img: "https://images.unsplash.com/photo-1449156001446-d419672010ba?auto=format&fit=crop&q=80&w=1200" },
-  { id: 8, title: "Pacific Coastline", price: "$2.8M", loc: "Oregon", acres: "85 Acres", img: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&q=80&w=1200" },
-  { id: 9, title: "Monument Valley Ranch", price: "$3.9M", loc: "Utah", acres: "210 Acres", img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=1200" },
-  { id: 10, title: "Desert Sun Retreat", price: "$1.7M", loc: "New Mexico", acres: "150 Acres", img: "https://images.unsplash.com/photo-1600585154526-990dcea4db0d?auto=format&fit=crop&q=80&w=1200" },
-  { id: 11, title: "Olympic Rain Forest", price: "$8.2M", loc: "Washington", acres: "60 Acres", img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&q=80&w=1200" },
-  { id: 12, title: "Lake Coeur d'Alene", price: "$5.1M", loc: "Idaho", acres: "400 Acres", img: "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&q=80&w=1200" },
+  { id: 1, title: "Royal Heritage Villas", price: "$4.5M", loc: "Malibu, CA", sqft: "5,400 sqft", category: "Villas", img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=1200" },
+  { id: 2, title: "Emerald Farm Lands", price: "$1.2M", loc: "Bozeman, MT", sqft: "12 Acres", category: "Farmlands", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1200" },
+  { id: 3, title: "Skyline Plotting", price: "$800k", loc: "Austin, TX", sqft: "2,500 sqft", category: "Plots", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200" },
+  { id: 4, title: "Golden Gate Estate", price: "$7.8M", loc: "San Francisco, CA", sqft: "8,200 sqft", category: "Villas", img: "https://images.unsplash.com/photo-1600585154340-be6199f7a096?auto=format&fit=crop&q=80&w=1200" },
+  { id: 5, title: "Desert Bloom Acres", price: "$2.1M", loc: "Scottsdale, AZ", sqft: "50 Acres", category: "Farmlands", img: "https://images.unsplash.com/photo-1600566753190-17f0bcd2a6c4?auto=format&fit=crop&q=80&w=1200" },
+  { id: 6, title: "Metropolis Plots", price: "$1.5M", loc: "Seattle, WA", sqft: "4,000 sqft", category: "Plots", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200" },
+];
+
+const CATEGORIES = ["All", "Villas", "Farmlands", "Plots"];
+
+const METRICS = [
+  { label: "Ensured Quality", value: 98 },
+  { label: "Client Contentedness", value: 95 },
+  { label: "Project Timelines", value: 92 },
+  { label: "Legal Compliance", value: 100 },
 ];
 
 // --- Components ---
 
-const RevealText = ({ children }: { children: React.ReactNode }) => (
-  <div className="overflow-hidden">
-    <motion.div
-      initial={{ y: "100%" }}
-      whileInView={{ y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {children}
-    </motion.div>
-  </div>
-);
+const ProgressBar = ({ label, value }: { label: string, value: number }) => {
+  return (
+    <div className="mb-8">
+      <div className="flex justify-between mb-2 text-xs font-bold uppercase tracking-widest text-primary/60">
+        <span>{label}</span>
+        <span>{value}%</span>
+      </div>
+      <div className="h-[2px] bg-primary/10 w-full overflow-hidden">
+        <motion.div 
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: value / 100 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="h-full bg-primary origin-left"
+        />
+      </div>
+    </div>
+  );
+};
 
-const ScaleIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
+const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
   <motion.div
-    initial={{ opacity: 0, scale: 0.98, y: 20 }}
-    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    transition={{ duration: 1, delay, ease: "easeOut" }}
+    transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
   >
     {children}
   </motion.div>
 );
 
-const MagneticCard = ({ children, className }: { children: React.ReactNode, className?: string }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) / 25;
-    const y = (e.clientY - rect.top - rect.height / 2) / 25;
-    setRotate({ x: -y, y: x });
-  };
-
-  const handleMouseLeave = () => setRotate({ x: 0, y: 0 });
-
-  return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={{ rotateX: rotate.x, rotateY: rotate.y }}
-      transition={{ type: "spring", stiffness: 120, damping: 25 }}
-      className={className}
-      style={{ perspective: 1500 }}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
 export default function App() {
+  const [activeCategory, setActiveCategory] = useState("All");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.05]);
+
+  const filteredListings = LISTINGS.filter(l => activeCategory === "All" || l.category === activeCategory);
 
   return (
-    <div className="relative min-h-screen font-sans selection:bg-secondary selection:text-white bg-background text-primary">
+    <div className="relative min-h-screen font-sans bg-white text-foreground">
       {/* Scroll Progress */}
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-secondary z-[100] origin-left" style={{ scaleX }} />
+      <motion.div className="fixed top-0 left-0 right-0 h-[3px] bg-secondary z-[100] origin-left" style={{ scaleX }} />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-background/95 backdrop-blur-md border-b border-primary/5">
-        <div className="container mx-auto px-10 py-8 flex justify-between items-center">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-4 cursor-pointer">
-            <span className="text-3xl font-serif font-bold tracking-tighter">OMI</span>
-            <div className="h-5 w-px bg-primary/20" />
-            <span className="text-[9px] uppercase tracking-[0.5em] opacity-40 font-bold">Land Heritage</span>
-          </motion.div>
-
-          <div className="hidden md:flex gap-16 text-[10px] uppercase tracking-[0.3em] font-bold opacity-60">
-            {['The Portfolio', 'Our Method', 'Global Reach', 'Connect'].map((item) => (
-              <a key={item} href={`#${item.split(' ').pop()?.toLowerCase()}`} className="hover:text-secondary transition-colors duration-300">{item}</a>
-            ))}
+      <nav className="fixed top-0 w-full z-50 bg-white shadow-sm border-b border-primary/5">
+        <div className="container mx-auto px-10 py-6 flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <span className="text-3xl font-serif font-bold tracking-tighter text-primary">OMI</span>
+            <div className="h-6 w-px bg-primary/10 hidden md:block" />
+            <div className="hidden md:flex flex-col">
+              <span className="text-[8px] uppercase tracking-[0.4em] font-bold text-primary/40 leading-none">Luxury Heritage</span>
+              <span className="text-[8px] uppercase tracking-[0.4em] font-bold text-secondary leading-none mt-1">Properties</span>
+            </div>
           </div>
 
-          <button className="hidden md:block text-[10px] uppercase tracking-widest font-bold border-b border-primary/20 pb-1 hover:border-secondary hover:text-secondary transition-all">
-            Private Access
-          </button>
+          <div className="hidden lg:flex gap-12 items-center">
+            {['Home', 'Villas', 'Plots', 'Farmlands', 'Contact'].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="text-[11px] uppercase tracking-[0.2em] font-bold text-primary/60 hover:text-secondary transition-colors">
+                {item}
+              </a>
+            ))}
+            <button className="px-8 py-3 bg-primary text-white text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-secondary transition-all">
+              Book Visit
+            </button>
+          </div>
 
-          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button className="lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
@@ -125,189 +111,234 @@ export default function App() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-background pt-32 px-10 md:hidden"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            className="fixed inset-0 z-40 bg-white pt-32 px-10 md:hidden"
           >
-            {['Portfolio', 'Method', 'Global', 'Connect'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsMenuOpen(false)} className="block text-4xl font-serif mb-8">{item}</a>
+            {['Home', 'Villas', 'Plots', 'Farmlands', 'Contact'].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsMenuOpen(false)} className="block text-3xl font-serif mb-8 text-primary border-b border-primary/5 pb-4">{item}</a>
             ))}
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden px-10">
-        <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-primary/30 z-10" />
+      <section className="relative h-[85vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-primary/40 z-10" />
           <img 
-            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2400" 
+            src="https://images.unsplash.com/photo-1600585154340-be6199f7a096?auto=format&fit=crop&q=80&w=2400" 
             className="w-full h-full object-cover" 
           />
-        </motion.div>
+        </div>
 
-        <div className="container mx-auto relative z-20 text-white text-center">
-          <RevealText>
-            <p className="text-secondary uppercase tracking-[0.6em] text-[10px] font-bold mb-10">Generational Stewardship</p>
-          </RevealText>
-          <RevealText>
-            <h1 className="text-7xl md:text-[140px] font-serif font-bold leading-[0.9] mb-14">
-              Quiet <span className="italic font-light">Legacy.</span>
+        <div className="container mx-auto px-10 relative z-20 text-white">
+          <Reveal>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="gold-line" />
+              <p className="text-[10px] uppercase tracking-[0.5em] font-bold text-secondary">Discover Your Dream Space</p>
+            </div>
+            <h1 className="text-6xl md:text-[100px] font-serif font-bold leading-none mb-10">
+              Redefining <br />
+              <span className="italic font-light">Excellence.</span>
             </h1>
-          </RevealText>
-          <ScaleIn delay={0.6}>
-            <p className="text-white/80 max-w-xl mx-auto text-xl font-light leading-relaxed mb-16">
-              Securing the most pristine acreage in the American West through discretion and unrivaled data.
+            <p className="text-white/80 max-w-xl text-lg font-light leading-relaxed mb-12">
+              Bespoke villas, lush farmlands, and premium plots curated for those who seek the extraordinary.
             </p>
-          </ScaleIn>
-          <ScaleIn delay={0.8}>
-            <div className="flex justify-center gap-12">
-              <a href="#portfolio" className="group flex items-center gap-6 text-[10px] uppercase tracking-[0.4em] font-bold border-b border-white/20 pb-2 hover:border-secondary transition-all">
-                The Collection <ArrowRight className="w-3 h-3 group-hover:translate-x-3 transition-transform" />
-              </a>
+            <div className="flex gap-8">
+              <button className="px-10 py-4 bg-secondary text-white font-bold text-[10px] uppercase tracking-widest hover:bg-white hover:text-primary transition-all">
+                View Projects
+              </button>
+              <button className="px-10 py-4 border border-white/30 text-white font-bold text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all">
+                Contact Us
+              </button>
             </div>
-          </ScaleIn>
+          </Reveal>
         </div>
       </section>
 
-      {/* Intro Section */}
-      <section className="py-40 bg-background">
+      {/* Stats/Quality Metrics */}
+      <section className="py-24 bg-accent/30">
         <div className="container mx-auto px-10">
-          <div className="grid lg:grid-cols-12 gap-20 items-center">
-            <div className="lg:col-span-7">
-              <ScaleIn>
-                <h2 className="text-4xl md:text-7xl font-serif font-bold leading-tight mb-12">
-                  The intersection of <br />
-                  <span className="text-secondary italic">heritage</span> and data.
-                </h2>
-                <p className="text-primary/60 text-lg font-light leading-relaxed max-w-2xl">
-                  Omi is not a brokerage; it is a legacy partner. We utilize proprietary mapping technology and a multi-generational network to identify land that never reaches the open market.
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <Reveal>
+                <div className="gold-line mb-6" />
+                <h2 className="text-4xl font-serif font-bold text-primary mb-8 leading-tight">Our Quality Benchmarks</h2>
+                <p className="text-primary/60 text-sm leading-relaxed mb-12">
+                  At Omi, we don't just build; we craft legacies. Every square foot is measured against the highest global standards of quality and legal transparency.
                 </p>
-              </ScaleIn>
-            </div>
-            <div className="lg:col-span-5">
-              <ScaleIn delay={0.2}>
-                <div className="aspect-[4/5] bg-primary/5 p-12 flex flex-col justify-center">
-                  <p className="text-secondary text-5xl font-serif mb-6 italic">40+</p>
-                  <p className="text-xs uppercase tracking-widest font-bold opacity-40 mb-10">Years of Stewardship</p>
-                  <p className="text-sm leading-relaxed opacity-60 italic font-light">
-                    "Land is the only thing in the world that amounts to anything, for it's the only thing in this world that lasts."
-                  </p>
+                <div className="grid grid-cols-2 gap-12">
+                  <div>
+                    <p className="text-4xl font-serif font-bold text-secondary mb-1">12+</p>
+                    <p className="text-[10px] uppercase tracking-widest font-bold opacity-40">Years Experience</p>
+                  </div>
+                  <div>
+                    <p className="text-4xl font-serif font-bold text-secondary mb-1">500+</p>
+                    <p className="text-[10px] uppercase tracking-widest font-bold opacity-40">Clients Served</p>
+                  </div>
                 </div>
-              </ScaleIn>
+              </Reveal>
+            </div>
+            <div className="bg-white p-12 shadow-xl border border-primary/5">
+              {METRICS.map((m) => (
+                <ProgressBar key={m.label} label={m.label} value={m.value} />
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Portfolio Grid */}
-      <section id="portfolio" className="py-32 border-t border-primary/5">
+      {/* Project Explorer (Tabbed) */}
+      <section id="portfolio" className="py-32">
         <div className="container mx-auto px-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-32 gap-10">
-            <div className="max-w-3xl">
-              <p className="text-secondary uppercase tracking-[0.4em] text-[10px] font-bold mb-6">Current Inventory</p>
-              <h2 className="text-4xl md:text-8xl font-serif font-bold">The Parcels.</h2>
-            </div>
-            <div className="flex gap-4">
-              <button className="w-12 h-12 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><Search className="w-4 h-4" /></button>
-              <button className="w-12 h-12 rounded-full border border-primary/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all"><Map className="w-4 h-4" /></button>
-            </div>
+          <div className="text-center mb-20">
+            <Reveal>
+              <p className="text-secondary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">Our Projects</p>
+              <h2 className="text-4xl md:text-6xl font-serif font-bold text-primary mb-12">Explore the Collection</h2>
+              <div className="flex justify-center flex-wrap gap-8">
+                {CATEGORIES.map((cat) => (
+                  <button 
+                    key={cat} 
+                    onClick={() => setActiveCategory(cat)}
+                    className={`text-[10px] uppercase tracking-[0.3em] font-bold pb-2 border-b-2 transition-all ${activeCategory === cat ? 'border-secondary text-secondary' : 'border-transparent text-primary/40 hover:text-primary'}`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </Reveal>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-16">
-            {LISTINGS.map((listing, i) => (
-              <ScaleIn key={listing.id} delay={i * 0.05}>
-                <MagneticCard className="group cursor-pointer">
-                  <div className="relative aspect-[4/5] overflow-hidden mb-10 bg-primary/5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <AnimatePresence mode="wait">
+              {filteredListings.map((listing, i) => (
+                <motion.div
+                  key={listing.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                  className="group"
+                >
+                  <div className="arch-container aspect-[4/5] mb-8 shadow-2xl">
                     <img 
                       src={listing.img} 
                       alt={listing.title} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-all duration-[1.5s] ease-out"
                     />
-                    <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                      <button className="px-6 py-3 bg-white text-primary text-[9px] uppercase tracking-widest font-bold translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                        View Details
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-end">
+                  <div className="flex justify-between items-start">
                     <div>
-                      <p className="text-secondary text-[9px] uppercase tracking-widest font-bold mb-2">{listing.loc}</p>
-                      <h3 className="text-2xl font-serif font-bold mb-1">{listing.title}</h3>
-                      <p className="text-[10px] uppercase tracking-widest opacity-40 font-bold">{listing.acres}</p>
+                      <h3 className="text-xl font-serif font-bold text-primary mb-1">{listing.title}</h3>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-primary/40 font-bold">{listing.loc}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xl font-serif text-secondary mb-1">{listing.price}</p>
-                      <ArrowRight className="w-5 h-5 ml-auto opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-500" />
+                      <p className="text-lg font-serif font-bold text-secondary mb-1">{listing.price}</p>
+                      <p className="text-[9px] uppercase tracking-widest text-primary/30">{listing.sqft}</p>
                     </div>
                   </div>
-                </MagneticCard>
-              </ScaleIn>
-            ))}
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       </section>
 
-      {/* Global Presence Section */}
-      <section id="global" className="py-40 bg-primary text-white">
-        <div className="container mx-auto px-10">
+      {/* Global & Expertise */}
+      <section className="py-32 bg-primary text-white overflow-hidden relative">
+        <div className="container mx-auto px-10 relative z-10">
           <div className="grid lg:grid-cols-2 gap-32 items-center">
-            <ScaleIn>
-              <p className="text-secondary uppercase tracking-[0.4em] text-[10px] font-bold mb-10">World Influence</p>
-              <h2 className="text-4xl md:text-8xl font-serif font-bold mb-14 leading-none">Global <br /><span className="italic font-light">Presence.</span></h2>
-              <div className="grid grid-cols-2 gap-16">
-                {[
-                  { icon: <Globe2 />, value: "14", label: "Countries" },
-                  { icon: <Compass />, value: "2.4B", label: "Managed Assets" },
-                  { icon: <Layers />, value: "85", label: "Network Sites" },
-                  { icon: <Map />, value: "12", label: "U.S. States" },
-                ].map((stat) => (
-                  <div key={stat.label}>
-                    <div className="text-secondary mb-4">{stat.icon}</div>
-                    <p className="text-5xl font-serif mb-2">{stat.value}</p>
-                    <p className="text-[10px] uppercase tracking-widest opacity-40 font-bold">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </ScaleIn>
-            <div className="relative aspect-square">
-              <div className="absolute inset-0 border border-white/5 rounded-full animate-pulse" />
-              <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200" className="w-full h-full object-cover grayscale opacity-40 rounded-full" />
+            <div className="order-2 lg:order-1 relative aspect-square">
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 border border-white/5 rounded-full"
+              />
+              <img 
+                src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=1200" 
+                className="w-full h-full object-cover grayscale opacity-40 rounded-full scale-90" 
+              />
+            </div>
+            <div className="order-1 lg:order-2">
+              <Reveal>
+                <div className="gold-line mb-10" />
+                <h2 className="text-4xl md:text-7xl font-serif font-bold mb-14 leading-none">Global <br /><span className="italic font-light">Reach.</span></h2>
+                <div className="space-y-12">
+                  {[
+                    { icon: <CheckCircle2 className="text-secondary" />, title: "Transparency", desc: "Every project is legally verified and titles are 100% clear." },
+                    { icon: <Globe2 className="text-secondary" />, title: "Market Intelligence", desc: "Direct access to premium plots in emerging high-growth corridors." },
+                    { icon: <Layers className="text-secondary" />, title: "Custom Development", desc: "Collaborative design approach for bespoke villa projects." },
+                  ].map((item) => (
+                    <div key={item.title} className="flex gap-8">
+                      <div className="flex-shrink-0 mt-1">{item.icon}</div>
+                      <div>
+                        <h3 className="text-xl font-serif font-bold mb-2">{item.title}</h3>
+                        <p className="text-white/50 text-sm font-light leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Connect Section */}
-      <section id="connect" className="py-40">
+      {/* Footer */}
+      <footer className="py-32 border-t border-primary/5 bg-white">
         <div className="container mx-auto px-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <ScaleIn>
-              <h2 className="text-4xl md:text-8xl font-serif font-bold mb-14 leading-none italic">Let's Talk <br />Heritage.</h2>
-              <p className="text-primary/50 text-xl font-light mb-20 max-w-xl mx-auto leading-relaxed">
-                We are currently accepting new stewardship partners for the 2024 season.
+          <div className="grid md:grid-cols-4 gap-20 mb-20">
+            <div className="col-span-2">
+              <span className="text-3xl font-serif font-bold text-primary mb-8 block">OMI</span>
+              <p className="text-primary/50 text-sm leading-relaxed max-w-xs mb-10">
+                Crafting luxury spaces and heritage farmlands for the modern steward. Professionalism meets vision.
               </p>
-              <div className="flex flex-col md:flex-row gap-12 justify-center items-center">
-                <button className="px-16 py-6 bg-primary text-white text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-secondary transition-all duration-700">
-                  Submit Inquiry
-                </button>
-                <div className="text-left">
-                  <p className="text-[9px] uppercase tracking-widest opacity-40 font-bold mb-2">Heritage Hotline</p>
-                  <p className="text-2xl font-serif font-bold">+1 (406) 555-0198</p>
+              <div className="flex gap-6">
+                <Instagram className="w-5 h-5 text-primary/30 hover:text-secondary cursor-pointer" />
+                <Linkedin className="w-5 h-5 text-primary/30 hover:text-secondary cursor-pointer" />
+                <Twitter className="w-5 h-5 text-primary/30 hover:text-secondary cursor-pointer" />
+              </div>
+            </div>
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-primary mb-10">Links</h4>
+              <div className="space-y-4 text-xs font-bold text-primary/50">
+                <p className="hover:text-secondary cursor-pointer transition-colors">Villas</p>
+                <p className="hover:text-secondary cursor-pointer transition-colors">Plots</p>
+                <p className="hover:text-secondary cursor-pointer transition-colors">Farmlands</p>
+                <p className="hover:text-secondary cursor-pointer transition-colors">Privacy Policy</p>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-primary mb-10">Contact</h4>
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <Phone className="w-4 h-4 text-secondary" />
+                  <span className="text-xs font-bold">+1 (406) 555-0198</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Mail className="w-4 h-4 text-secondary" />
+                  <span className="text-xs font-bold">inquiry@omirealestate.com</span>
                 </div>
               </div>
-            </ScaleIn>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-24 border-t border-primary/5">
-        <div className="container mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-12">
-          <div className="text-2xl font-serif font-bold">OMI</div>
-          <div className="flex gap-16 text-[9px] uppercase tracking-[0.3em] font-bold opacity-40">
-            {['Instagram', 'LinkedIn', 'Twitter'].map((i) => <p key={i} className="hover:text-secondary cursor-pointer transition-all">{i}</p>)}
+          <div className="pt-10 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-8">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-primary/20 font-bold">
+              © 2024 OMI REAL ESTATE HERITAGE. ALL RIGHTS RESERVED.
+            </p>
+            <div className="flex items-center gap-2">
+              <span className="text-[9px] uppercase tracking-widest text-primary/40 font-bold">Design by</span>
+              <span className="text-[9px] uppercase tracking-widest text-secondary font-bold">Antigravity AI</span>
+            </div>
           </div>
-          <p className="text-[9px] uppercase tracking-widest opacity-20 font-bold">
-            © 2024 OMI LAND HERITAGE. ALL RIGHTS RESERVED.
-          </p>
         </div>
       </footer>
     </div>
