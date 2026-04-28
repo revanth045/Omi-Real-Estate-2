@@ -19,7 +19,7 @@ const LISTINGS: Listing[] = [
   { id: 2, title: "Emerald Farm Lands", price: "$1.2M", loc: "Bozeman, MT", sqft: "12 Acres", category: "Farmlands", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1200" },
   { id: 3, title: "Skyline Plotting", price: "$800k", loc: "Austin, TX", sqft: "2,500 sqft", category: "Plots", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200" },
   { id: 4, title: "Golden Gate Estate", price: "$7.8M", loc: "San Francisco, CA", sqft: "8,200 sqft", category: "Villas", img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=1200" },
-  { id: 5, title: "Desert Bloom Acres", price: "$2.1M", loc: "Scottsdale, AZ", sqft: "50 Acres", category: "Farmlands", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200" },
+  { id: 5, title: "Sedona Red Rock Estate", price: "$2.1M", loc: "Arizona, USA", sqft: "50 Acres", category: "Farmlands", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200" },
   { id: 6, title: "Metropolis Plots", price: "$1.5M", loc: "Seattle, WA", sqft: "4,000 sqft", category: "Plots", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200" },
 ];
 
@@ -159,7 +159,7 @@ export default function App() {
       </section>
 
       {/* Stats/Quality Metrics */}
-      <section id="metrics" className="py-24 bg-accent/30">
+      <section id="metrics" className="py-24 bg-primary/5">
         <div className="container mx-auto px-10">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
@@ -293,23 +293,23 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="py-32 border-t border-primary/5 bg-white">
+      <footer id="contact" className="py-32 border-t border-primary/5 bg-primary text-white">
         <div className="container mx-auto px-10">
           <div className="grid md:grid-cols-4 gap-20 mb-20">
             <div className="col-span-2">
-              <span className="text-3xl font-serif font-bold text-primary mb-8 block">OMI</span>
-              <p className="text-primary/50 text-sm leading-relaxed max-w-xs mb-10">
+              <span className="text-3xl font-serif font-bold text-white mb-8 block">OMI</span>
+              <p className="text-white/50 text-sm leading-relaxed max-w-xs mb-10">
                 Crafting luxury spaces and heritage farmlands for the modern steward. Professionalism meets vision.
               </p>
-              <div className="flex gap-6">
+              <div className="flex gap-6 text-white/30">
                 <Instagram className="w-5 h-5 text-primary/30 hover:text-secondary cursor-pointer" />
                 <Linkedin className="w-5 h-5 text-primary/30 hover:text-secondary cursor-pointer" />
                 <Twitter className="w-5 h-5 text-primary/30 hover:text-secondary cursor-pointer" />
               </div>
             </div>
             <div>
-              <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-primary mb-10">Links</h4>
-              <div className="space-y-4 text-xs font-bold text-primary/50">
+              <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-white mb-10">Links</h4>
+              <div className="space-y-4 text-xs font-bold text-white/50">
                 <p className="hover:text-secondary cursor-pointer transition-colors">Villas</p>
                 <p className="hover:text-secondary cursor-pointer transition-colors">Plots</p>
                 <p className="hover:text-secondary cursor-pointer transition-colors">Farmlands</p>
@@ -317,27 +317,23 @@ export default function App() {
               </div>
             </div>
             <div>
-              <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-primary mb-10">Contact</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-white mb-10">Contact</h4>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <Phone className="w-4 h-4 text-secondary" />
-                  <span className="text-xs font-bold">+1 (406) 555-0198</span>
+                  <span className="text-xs font-bold text-white/80">+1 (406) 555-0198</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <Mail className="w-4 h-4 text-secondary" />
-                  <span className="text-xs font-bold">inquiry@omirealestate.com</span>
+                  <span className="text-xs font-bold text-white/80">inquiry@omirealestate.com</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="pt-10 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-[9px] uppercase tracking-[0.4em] text-primary/20 font-bold">
+          <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-bold">
               © 2024 OMI REAL ESTATE HERITAGE. ALL RIGHTS RESERVED.
             </p>
-            <div className="flex items-center gap-2">
-              <span className="text-[9px] uppercase tracking-widest text-primary/40 font-bold">Design by</span>
-              <span className="text-[9px] uppercase tracking-widest text-secondary font-bold">Antigravity AI</span>
-            </div>
           </div>
         </div>
       </footer>
