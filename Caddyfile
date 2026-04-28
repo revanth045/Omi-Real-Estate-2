@@ -1,4 +1,4 @@
-:{$PORT} {
+:8181 {
     root * dist
     file_server
     try_files {path} /index.html

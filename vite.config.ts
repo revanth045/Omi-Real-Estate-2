@@ -10,11 +10,11 @@ export default defineConfig({
     },
   },
   server: {
-    port: Number(process.env.PORT) || 5173,
+    port: Number(process.env.PORT) || 8181,
     host: '0.0.0.0'
   },
   preview: {
-    port: Number(process.env.PORT) || 5173,
+    port: Number(process.env.PORT) || 8181,
     host: '0.0.0.0'
   },
   base: process.env.BASE_PATH || '/'
