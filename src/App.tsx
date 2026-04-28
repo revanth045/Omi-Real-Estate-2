@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Menu, X, Globe2, Layers, Phone, Mail, Instagram, Linkedin, Twitter, CheckCircle2, ChevronRight } from 'lucide-react'
+import { Menu, X, Globe2, Layers, Phone, Mail, Instagram, Linkedin, Twitter, CheckCircle2, ChevronRight } from 'lucide-react'
 
 // --- Types ---
 interface Listing {
