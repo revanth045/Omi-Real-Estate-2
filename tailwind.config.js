@@ -7,11 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#003366",    /* Deep Navy */
-        secondary: "#DA9100",  /* Heritage Gold */
-        accent: "#F4F4F4",     /* Light Grey */
+        primary: "#2D3B2D",    /* Forest Sage */
+        secondary: "#A88E75",  /* Muted Stone */
+        accent: "#E9ECEF",     /* Soft Grey */
         background: "#FFFFFF", /* Clean White */
-        foreground: "#1F1F1F", /* Dark Charcoal */
+        foreground: "#1A1A1A", /* Deep Charcoal */
       },
       fontFamily: {
         sans: ['Open Sans', 'sans-serif'],

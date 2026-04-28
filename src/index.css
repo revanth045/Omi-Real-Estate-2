@@ -3,45 +3,29 @@
 @tailwind utilities;
 
 :root {
-  --primary: #003366;      /* Deep Navy Blue */
-  --secondary: #DA9100;    /* Heritage Gold */
-  --accent: #F4F4F4;       /* Light Grey */
+  --primary: #2D3B2D;      /* Forest Sage */
+  --secondary: #A88E75;    /* Muted Stone */
+  --accent: #E9ECEF;       /* Soft Grey */
   --background: #FFFFFF;   /* Clean White */
-  --foreground: #1F1F1F;   /* Dark Charcoal */
-  --card: #FFFFFF;
+  --foreground: #1A1A1A;   /* Deep Charcoal */
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: 'Open Sans', sans-serif;
-  overflow-x: hidden;
 }
 
 .font-serif {
   font-family: 'Playfair Display', serif;
 }
 
-.nav-link {
-  @apply text-[11px] uppercase tracking-[0.2em] font-bold text-primary/70 transition-colors duration-300;
-}
-
-.nav-link:hover, .nav-link.active {
-  @apply text-secondary;
-}
-
 .gold-line {
   @apply w-12 h-[2px] bg-secondary;
 }
 
-/* Arched Image Container */
 .arch-container {
   @apply rounded-t-[100px] overflow-hidden relative;
-}
-
-/* Progress Bar Animation */
-.progress-bar {
-  @apply h-1 bg-primary origin-left;
 }
 
 /* Custom Scrollbar */
@@ -55,10 +39,6 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--primary);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary);
 }
 
 html {
