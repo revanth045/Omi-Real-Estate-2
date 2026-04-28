@@ -168,7 +168,13 @@ const PropertyModal = ({ property, onClose }: { property: typeof LISTINGS[0] | n
                 </ul>
               </div>
 
-              <button className="w-full py-5 bg-primary text-white text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-secondary transition-all">
+              <button 
+                onClick={() => {
+                  onClose();
+                  document.getElementById('inquiry')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="w-full py-5 bg-primary text-white text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-secondary transition-all"
+              >
                 Inquire About Property
               </button>
             </Reveal>
