@@ -143,6 +143,72 @@ const ScaleIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: n
   </motion.div>
 );
 
+const PropertyModal = ({ property, onClose }: { property: typeof LISTINGS[0] | null, onClose: () => void }) => {
+  if (!property) return null;
+  return (
+    <AnimatePresence>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10 bg-primary/40 backdrop-blur-md"
+        onClick={onClose}
+      >
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.9, opacity: 0, y: 20 }}
+          className="bg-background w-full max-w-6xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col md:flex-row relative"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button onClick={onClose} className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-primary hover:bg-white transition-all">
+            <X className="w-5 h-5" />
+          </button>
+          
+          <div className="md:w-3/5 h-[40vh] md:h-auto overflow-hidden">
+            <img src={property.img} alt={property.title} className="w-full h-full object-cover" />
+          </div>
+          
+          <div className="md:w-2/5 p-10 md:p-16 overflow-y-auto bg-background">
+            <Reveal>
+              <p className="text-secondary uppercase tracking-[0.4em] text-[10px] font-bold mb-4">{property.category}</p>
+              <h2 className="text-4xl font-serif font-bold text-primary mb-2">{property.title}</h2>
+              <p className="text-xl font-bold text-secondary mb-8">{property.price}</p>
+              
+              <div className="grid grid-cols-2 gap-8 mb-10 border-y border-primary/5 py-8">
+                <div>
+                  <p className="text-[9px] uppercase tracking-widest font-bold text-primary/40 mb-1">Location</p>
+                  <p className="text-primary font-bold text-sm">{property.loc}</p>
+                </div>
+                <div>
+                  <p className="text-[9px] uppercase tracking-widest font-bold text-primary/40 mb-1">Scale</p>
+                  <p className="text-primary font-bold text-sm">{property.sqft}</p>
+                </div>
+              </div>
+
+              <div className="mb-10">
+                <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-primary mb-6">Premium Features</p>
+                <ul className="space-y-4">
+                  {['Curated Landscaping', '24/7 Elite Security', 'Sustainable Infrastructure', 'Smart Access Control'].map((feat) => (
+                    <li key={feat} className="flex items-center gap-3 text-sm text-primary/60">
+                      <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                      {feat}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <button className="w-full py-5 bg-primary text-white text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-secondary transition-all">
+                Inquire About Property
+              </button>
+            </Reveal>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 const MagneticButton = ({ children, className }: { children: React.ReactNode, className?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -220,6 +286,7 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentTheme, setCurrentTheme] = useState<keyof typeof THEMES>("champagne");
+  const [selectedProperty, setSelectedProperty] = useState<typeof LISTINGS[0] | null>(null);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
@@ -237,6 +304,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen font-sans bg-white text-foreground">
+      <PropertyModal property={selectedProperty} onClose={() => setSelectedProperty(null)} />
       {/* Scroll Progress */}
       <motion.div className="fixed top-0 left-0 right-0 h-[3px] bg-secondary z-[100] origin-left" style={{ scaleX }} />
 
@@ -452,7 +520,10 @@ export default function App() {
                         className="w-full h-full object-cover group-hover:scale-110 transition-all duration-[1.5s] ease-out"
                       />
                       <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                        <button className="px-6 py-3 bg-white text-primary text-[9px] uppercase tracking-widest font-bold translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                        <button 
+                          onClick={() => setSelectedProperty(listing)}
+                          className="px-6 py-3 bg-white text-primary text-[9px] uppercase tracking-widest font-bold translate-y-4 group-hover:translate-y-0 transition-all duration-500"
+                        >
                           View Details
                         </button>
                       </div>
