@@ -126,7 +126,7 @@ export default function App() {
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-primary/10 z-10" />
+          <div className="absolute inset-0 bg-primary/60 z-10" />
           <img 
             src="https://images.unsplash.com/photo-1600585154340-be6199f7a096?auto=format&fit=crop&q=80&w=2400" 
             className="w-full h-full object-cover" 
