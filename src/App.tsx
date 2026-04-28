@@ -93,6 +93,17 @@ const FAQItem = ({ q, a }: { q: string, a: string }) => {
   );
 };
 
+const ScaleIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.9 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+  >
+    {children}
+  </motion.div>
+);
+
 const Reveal = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
